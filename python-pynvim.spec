@@ -1,6 +1,6 @@
 Name:		python-pynvim
 Version:	0.5.2
-Release:	2
+Release:	3
 Source0:	https://files.pythonhosted.org/packages/source/p/pynvim/pynvim-%{version}.tar.gz
 Summary:	Python client to neovim
 URL:		https://pypi.org/project/pynvim/
