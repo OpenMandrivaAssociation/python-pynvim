@@ -1,13 +1,19 @@
+%define module pynvim
+
 Name:		python-pynvim
-Version:	0.5.2
-Release:	3
-Source0:	https://files.pythonhosted.org/packages/source/p/pynvim/pynvim-%{version}.tar.gz
+Version:	0.6.0
+Release:	1
+Source0:	https://files.pythonhosted.org/packages/source/p/%{module}/%{module}-%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Summary:	Python client to neovim
 URL:		https://pypi.org/project/pynvim/
 License:	Apache-2.0
 Group:		Development/Python
-BuildRequires:	python%{pyver}dist(pip)
+BuildSystem:	python
 BuildArch:	noarch
+BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(wheel)
+
 # Duplicate package detected 2025/04/25 after 6.0
 %rename python-neovim
 
@@ -15,15 +21,14 @@ BuildArch:	noarch
 Python client to neovim
 
 %prep
-%autosetup -p1 -n pynvim-%{version}
-
-%build
-%py_build
-
-%install
-%py_install
+%autosetup -n %{module}-%{version} -p1
+# Remove bundled egg-info
+rm -rf %{module}.egg-info
 
 %files
-%{py_sitedir}/pynvim
+%doc README.md
+%license LICENSE
+%{_bindir}/%{module}-python
 %{py_sitedir}/neovim
-%{py_sitedir}/pynvim-*.*-info
+%{py_sitedir}/%{module}
+%{py_sitedir}/%{module}-%{version}.dist-info
